@@ -1,19 +1,29 @@
 /*
 Dmitry Lebedev (DumDumbIch) dumdumbich@gmail.com
-Create: 26.02.2022
+Create: 12.03.2022
 Release:
 */
 
-// the setup function runs once when you press reset or power the board
+/*
+Основной цикл приложения - не меняется.
+ */
+
+#define _MODE_DEBUG
+#define _MODE_DEBUG_TOSERIAL
+
+#include "Staffer.h"
+
+
+Staffer& staffer = Staffer::getInstance();
+
+
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+  	staffer.Prepare();
 }
 
-// the loop function runs over and over again forever
 void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(100);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(2000);                       // wait for a second
+  	// staffer.Sheduler();
+  	staffer.Dispatcher();
+  	// staffer.Background();
+  	// staffer.Scavenger();
 }
