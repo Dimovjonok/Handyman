@@ -32,6 +32,20 @@ typedef uint8_t BoardPins;
 typedef uint8_t NumberOfPin;
 
 
+enum class TypeOfPin: uint8_t {
+  Undefined = 99,
+  Digital = DIGITAL,
+  Analog = ANALOG,
+  PWD
+};
+
+enum class DirectOfPin: uint8_t {
+  Undefined = 99,
+  Input = INPUT_PULLUP,
+  Output = OUTPUT
+};
+
+
 #ifdef _ARDUINO_PRO_MINI
 	const NumberOfPin HAL_LedBuiltin = {LED_BUILTIN};
 	const NumberOfPin HAL_PinSwitchNo = {2};
@@ -58,7 +72,7 @@ class HAL_Board {
     static void setPinLevel(BoardPins pin, bool level); // Used Arduino library
     static void pinToHigh(BoardPins pin);
     static void pinToLow(BoardPins pin);
-    static bool checkPinConfig(BoardPins pin, PinType type, PinMode mode); // !!! Method not released !!!
+    static bool checkPinConfig(BoardPins pin, TypeOfPin type, DirectOfPin mode); // !!! Method not released !!!
     HAL_Board();
     HAL_Board(const HAL_Board& board);
     const HAL_Board& operator=(const HAL_Board& board);
@@ -66,11 +80,11 @@ class HAL_Board {
 
 
 void HAL_Board::configPinDI(BoardPins pin){
-  if (checkPinConfig(pin,DIGITAL,INPUT)) pinMode(pin, INPUT); // Used Arduino library
+  if (checkPinConfig(pin,TypeOfPin::Digital,DirectOfPin::Input)) pinMode(pin, INPUT_PULLUP); // Used Arduino library
 }
 
 void HAL_Board::configPinDO(BoardPins pin){
-  if (checkPinConfig(pin,DIGITAL,OUTPUT)) pinMode(pin, OUTPUT); // Used Arduino library
+  if (checkPinConfig(pin,TypeOfPin::Digital,DirectOfPin::Output)) pinMode(pin, OUTPUT); // Used Arduino library
 }
 
 bool HAL_Board::getPinLevel(BoardPins pin){
@@ -89,7 +103,7 @@ void HAL_Board::pinToLow(BoardPins pin){
   setPinLevel(pin, LOW);
 }
 
-bool HAL_Board::checkPinConfig(BoardPins pin, PinType type, PinMode mode){
+bool HAL_Board::checkPinConfig(BoardPins pin, TypeOfPin type, DirectOfPin mode){
   return true; // It's gag - Replace with the real code
 }
 

@@ -1,7 +1,7 @@
 /*
 Dmitry Lebedev (Dimovjonok) dmitrylebedev@mail.ru
 Create: 28.08.2021
-Release:
+Release: 14.03.2022
 */
 
 /*
@@ -18,18 +18,6 @@ Release:
 
 #include "HAL_Board.h"
 
-enum class TypeOfPin: uint8_t {
-  Undefined = 0,
-  Digital,
-  Analog,
-  PWD
-};
-
-enum class DirectOfPin: uint8_t {
-  Undefined = 0,
-  Input,
-  Output
-};
 
 class Pin {
   public:
